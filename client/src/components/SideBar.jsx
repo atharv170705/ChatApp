@@ -13,7 +13,7 @@ function SideBar() {
      unseenMessages, setUnseenMessages} = useContext(ChatContext);
   const {logout, onlineUsers, setOnlineUsers} = useContext(AuthContext);
 
-  const [input, setInput] = useState(false);
+  const [input, setInput] = useState('');
 
   const filteredUsers = input ? users.filter((user) => user.fullName.toLowerCase().includes(input.toLowerCase())) : users;
 
