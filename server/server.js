@@ -13,7 +13,11 @@ const server = http.createServer(app);
 
 // initialize socket.io server
 export const io = new Server(server, {
-    cors: {origin:"*"}
+    cors: {
+    origin: "https://chat-app-eta-mocha.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true
+  }
 })
 
 //store online users
@@ -38,9 +42,12 @@ io.on("connection", (socket) => {
 })
 
 // middleware setup
-
+const allowedOrigins = ["https://chat-app-eta-mocha.vercel.app"];
 app.use(express.json({limit: "4mb"}));
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 
 //routes setup
 app.use("/api/status", (req, res) => {
